@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Расчет раздвижной перегородки</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { margin-bottom: 20px; }
+        pre { background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+        img { display: block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Параметры перегородки</h1>
+    <form action="/calculate" method="post">
+        <label>Ширина перегородки (мм): <input type="text" name="shirina"></label><br>
+        <label>Высота перегородки (мм): <input type="text" name="visota"></label><br>
+        <label>Количество дверей (шт.): <input type="text" name="door"></label><br>
+        <label>Количество треков (шт.): <input type="text" name="trek"></label><br>
+        <label>Количество вертикальных импостов: <input type="text" name="impost_v"></label><br>
+        <label>Количество горизонтальных импостов: <input type="text" name="impost_h"></label><br>
+        <label>Толщина стекла (4, 6, 8 мм): <input type="text" name="t_steklo"></label><br>
+        <label>Тип стекла (1 - закаленное, 0 - сырое): <input type="text" name="type_steklo"></label><br>
+        <input type="submit" value="Рассчитать">
+    </form>
+    <div id="result"></div>
+    <script>
+        document.querySelector('form').onsubmit = async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const response = await fetch('/calculate', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+            document.getElementById('result').innerHTML = result;
+        };
+    </script>
+</body>
+</html>

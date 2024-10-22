@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раздвижная перегородка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .input-group select {
+            padding: 8px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Раздвижная перегородка</h1>
+        <form id="partition-form">
+            <div class="input-group">
+                <label for="shirina">Ширина перегородки (мм):</label>
+                <input type="number" id="shirina" name="shirina" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="visota">Высота перегородки (мм):</label>
+                <input type="number" id="visota" name="visota" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="door">Количество дверей (шт.):</label>
+                <input type="number" id="door" name="door" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="trek">Количество треков (шт.):</label>
+                <input type="number" id="trek" name="trek" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="impost_v">Количество вертикальных импостов:</label>
+                <input type="number" id="impost_v" name="impost_v" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="impost_h">Количество горизонтальных импостов:</label>
+                <input type="number" id="impost_h" name="impost_h" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="steklo">Толщина стекла:</label>
+                <select id="steklo" name="steklo" required>
+                    <option value="4">4 мм</option>
+                    <option value="6">6 мм</option>
+                    <option value="8">8 мм</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="type_steklo">Тип стекла:</label>
+                <select id="type_steklo" name="type_steklo" required>
+                    <option value="1">Закаленное</option>
+                    <option value="0">Сырое</option>
+                </select>
+            <div class="input-group">
+                <label for="montaj">Стомсость монтажа:</label>
+                <input type="number" id="montaj" name="montaj" min="0" required>
+            </div>
+            <div class="input-group">
+                <label for="dostavka">Стомсость доставки:</label>
+                <input type="number" id="dostavka" name="dostavka" min="0" required>
+            </div>
+            </div>
+            <button type="submit">Рассчитать</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        document.getElementById('partition-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let formData = new FormData(event.target);
+            fetch('/calculate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('result').innerHTML = data;
+            });
+        });
+    </script>
+</body>
+</html>
