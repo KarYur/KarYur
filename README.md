@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @KarYur
+- 👋 Hi, I’m @Karen
 --->
 About me:
 I am Karen Muradyan, the author of several innovative software solutions. One of my programs enables users to upload images in any format and convert them into any other desired format with specific pixel dimensions, as defined by the user. This tool is particularly useful for platforms like Wildberries, where it can help sellers meet the platform's image upload requirements.
